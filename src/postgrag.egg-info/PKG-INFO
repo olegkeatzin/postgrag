@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: postgrag
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=2.3.2
+Requires-Dist: ollama>=0.5.3
+Requires-Dist: pgvector>=0.4.1
+Requires-Dist: psycopg2>=2.9.10
+Requires-Dist: sentence-transformers>=5.1.0
+Requires-Dist: torch>=2.8.0
+Requires-Dist: tqdm>=4.67.1
+Requires-Dist: transformers>=4.55.0
+Requires-Dist: unstructured[all-docs]>=0.18.11
