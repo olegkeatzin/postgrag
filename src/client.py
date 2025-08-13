@@ -22,18 +22,18 @@ class Client:
             llm = u_input
 
         u_input = input("Прегенерировать ответ на запрос для повышения качества ответов? (займёт больше времени): Y/N ")
-        if u_input== 'Y':
+        if u_input== 'Y' or 'y':
             llmplus = True
-            u_input = input("Введите модель для прегенерации: / либо использовать основную модель")
+            u_input = input("Введите модель для прегенерации: / либо использовать основную модель ")
             if u_input != '':
                 prellm = u_input
-        elif u_input == 'N':
+        elif u_input == 'N' or 'n':
             llmplus = False
 
         u_input = input("Использовать реранкинг? (займёт больше времени): Y/N ")
-        if u_input== 'Y':
+        if u_input== 'Y' or 'y':
             rerank = True
-        elif u_input == 'N':
+        elif u_input == 'N' or 'n':
             rerank = False
 
         print("Введите параметры для разделения документов:")
@@ -132,8 +132,8 @@ class Client:
                 print('Ответ модели без RAG: ')
                 print(llm_answer)
             print('РЕЗУЛЬТАТ: ')
-            answer = ollama.generate(system = 'Ты — помощник, который отвечает на запрос пользователя, используя только предоставленный контекст.', 
-                            model='mistral-nemo', 
+            answer = ollama.generate(system = 'Ты — помощник, который отвечает на запрос пользователя, используя предоставленный контекст.', 
+                            model=llm, 
                             prompt=f"""
                             Контекст:
                             {res}

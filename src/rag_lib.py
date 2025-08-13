@@ -14,6 +14,10 @@ from pgvector.psycopg2 import register_vector
 from typing import List, Dict
 import os
 
+if torch.cuda.is_available():
+    DEVICE = 'cuda'
+else:
+    DEVICE = 'cpu'
 class RAG:
     def __init__(self, conn, 
                 llm='mistral-nemo', #Загружается через ollama
@@ -50,10 +54,10 @@ class RAG:
         #bi encoder
         self.tokenizer = AutoTokenizer.from_pretrained(self.config['bi_encoder'])
         self.model_bi_encoder = AutoModel.from_pretrained(self.config['bi_encoder'])
+        
 
         #cross encoder
-        self.model_cross_encoder = CrossEncoder(self.config['cross_encoder'], max_length=512, device='cuda')
-
+        self.model_cross_encoder = CrossEncoder(self.config['cross_encoder'], max_length=512, device=DEVICE)
     # def get_text_unstructured(self, path_to_pdf): #Парсер текстов с помощью библиотеки unstructured
     #     elements = partition_pdf(path_to_pdf)
     #     text_elements = [element for element in elements if element.category in ["Title", "NarrativeText"]] #ОСТАВЛЯЕМ ТОЛЬКО ТЕКСТ, УБИРАЕМ ТАБЛИЦЫ И ИЗОБРАЖЕНИЯ
